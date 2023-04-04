@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('attendences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained('employees')->onDelete('restrict');
+            $table->date('date');
             $table->datetime('checkin_at')->nullable();
             $table->datetime('checkout_at')->nullable();
             $table->timestamps();
