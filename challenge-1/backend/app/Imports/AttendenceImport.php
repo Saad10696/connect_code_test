@@ -23,8 +23,8 @@ class AttendenceImport implements ToModel, WithStartRow
         return new Attendence([
             'employee_id' => $row[1],
             'date' => $row[2],
-            'checkin' => $row[3],
-            'checkout' => $row[4],
+            'checkin_at' => $row[3],
+            'checkout_at' => $row[4],
         ]);
     }
 }

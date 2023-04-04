@@ -35,4 +35,11 @@ class AttendenceController extends Controller
             'message' => 'Request Completed Successfully'
         ]);
     }
+
+    public function attendenceByEmpId($id){
+        return response()->json([
+            'data' => $this->_service->findOne( $id ),
+            'message' => 'Request Completed Successfully'
+        ]);
+    }
 }

@@ -15,6 +15,23 @@ class AttendenceService extends Controller
     }
 
     public function findAll($filters = []){
-        return Attendence::where( $filters )->limit(500)->get();
+        return Attendence::where( $filters )
+        ->join('employees as e', 'e.id', '=', 'employee_id')
+        ->select(['attendences.*', 'e.name as emp_name', \DB::raw("TIMESTAMPDIFF(HOUR, checkin_at, checkout_at) as worked_hrs") ])
+        ->limit(500)
+        ->get();
+    }
+
+    public function findOne( int $id ){
+        $attendance = Attendence::where('employee_id', $id)
+        ->join('employees as e', 'e.id', '=', 'employee_id')
+        ->select(['attendences.*', 'e.name as emp_name', \DB::raw("TIMESTAMPDIFF(HOUR, checkin_at, checkout_at) as worked_hrs") ])
+        ->limit(30)
+        ->get();
+
+        return [
+            'work_hrs' => $attendance->sum('worked_hrs'),
+            'attendance' => $attendance,
+        ];
     }
 }
