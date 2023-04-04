@@ -29,9 +29,9 @@ class AttendenceController extends Controller
         }
     }
 
-    public function index(){
+    public function index(Request $request){
         return response()->json([
-            'data' => [],
+            'data' => $this->_service->findAll( $request->only('employee_id') ),
             'message' => 'Request Completed Successfully'
         ]);
     }
