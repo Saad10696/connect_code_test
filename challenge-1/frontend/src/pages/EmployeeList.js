@@ -8,7 +8,7 @@ function EmployeeList(){
 
   useEffect( () => {
 
-    Http.get(`${BASEURL}attendence`).then(res => {
+    Http.get(`${BASEURL}attendance`).then(res => {
       if(res.data) setList( res.data.data ) 
     })
 
